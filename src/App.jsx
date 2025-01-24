@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Homepage from './pages/Homepage';
 import Createpackage from './pages/Create-package';
+import Loginpage from './pages/Loginpage';
 function App() {
   
 
@@ -15,6 +16,7 @@ function App() {
      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Loginpage />} />
         <Route path="/cp" element={<Createpackage />} />
       </Routes>
     </BrowserRouter>

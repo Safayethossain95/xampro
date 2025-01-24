@@ -6,6 +6,7 @@ function Createpackage() {
   const initialColumns = {
     todo: {
       id: 'todo',
+      title:"List of services",
       list: [
         { id:"1",text: 'Speaking', img: 'assets/images/speaking-icon.png', price: 100 },
         { id:"2",text: 'Reading', img: 'assets/images/reading-icon.png', price: 300 },
@@ -15,6 +16,7 @@ function Createpackage() {
     },
     doing: {
       id: 'doing',
+      title:"Your Format",
       list: [],
     }
   };
@@ -36,7 +38,6 @@ function Createpackage() {
     const start = columns[source.droppableId];
     const end = columns[destination.droppableId];
 
-    // If start is the same as end, we're in the same column
     if (start === end) {
       const newList = Array.from(start.list);
       const [movedItem] = newList.splice(source.index, 1);
@@ -48,7 +49,6 @@ function Createpackage() {
         [newCol.id]: newCol,
       }));
     } else {
-      // If start is different from end, we need to update multiple columns
       const newStartList = Array.from(start.list);
       const [movedItem] = newStartList.splice(source.index, 1);
 
@@ -72,7 +72,7 @@ function Createpackage() {
       <div className="grid grid-cols-2 gap-4 p-8">
         {Object.values(columns).map((col) => (
           <div key={col.id} className="bg-white rounded-lg shadow-lg p-4">
-            <h2 className="text-xl font-semibold mb-4">{col.id.toUpperCase()}</h2>
+            <h2 className="text-3xl font-sora font-semibold px-2  mb-4">{col.title.toUpperCase()}</h2>
             <Column col={col} />
           </div>
         ))}
