@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import MyNavbar from '../components/MyNavbar';
 import FixexPaddingforNavbar from '../components/sub-components/FixexPaddingforNavbar';
 import { useSelector } from 'react-redux';
+import FooterOther from '../components/FooterOther';
 
 function Createpackage() {
   const initialColumns = {
@@ -78,7 +79,7 @@ function Createpackage() {
    
     setPackagedata((prev) => ({
       ...prev,
-      [id]: value, // Update the respective field
+      [id]: value, 
     }));
   };
   const createpackerr = useSelector(state=>state.example.createpackerr)
@@ -88,7 +89,7 @@ function Createpackage() {
    <MyNavbar/>
    <FixexPaddingforNavbar>
    <div className="container">
-   <h4 className="font-sora text-[24px] font-bold py-6">Create Package</h4>
+   <h4 className="font-sora text-[24px] font-bold px-4 py-6">Create Package</h4>
        
    <div className="flex m-4 items-center gap-4 bg-white p-4 rounded-lg shadow-md">
       {/* Package Name Input */}
@@ -100,8 +101,8 @@ function Createpackage() {
           type="text"
           id="packageName"
           placeholder="Enter package name"
-          value={packagedata.packageName} // Bind value to state
-          onChange={handleChange} // Handle changes
+          value={packagedata.packageName}
+          onChange={handleChange} 
           className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
         />
         {
@@ -116,9 +117,9 @@ function Createpackage() {
         </label>
         <select
           id="courseType"
-          value={packagedata.courseType} // Bind value to state
-          onChange={handleChange} // Handle changes
-          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 focus:outline-none"
+          value={packagedata.courseType}
+          onChange={handleChange} 
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none"
         >
           <option value="IELTS general">IELTS general</option>
           <option value="IELTS academic">IELTS academic</option>
@@ -126,7 +127,7 @@ function Createpackage() {
       </div>
     </div>
      <DragDropContext onDragEnd={onDragEnd}>
-      <div className="grid grid-cols-2 gap-4 p-8">
+      <div className="grid grid-cols-2 gap-4 p-4">
         {Object.values(columns).map((col) => (
           <div key={col.id} className="bg-white rounded-lg shadow-lg p-4">
             <h2 className="text-3xl font-sora font-semibold px-2  mb-4">{col.title.toUpperCase()}</h2>
@@ -136,7 +137,7 @@ function Createpackage() {
       </div>
     </DragDropContext>
    </div>
-   
+   <FooterOther/>
    </FixexPaddingforNavbar>
    </>
   );

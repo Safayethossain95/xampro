@@ -1,5 +1,5 @@
 import CartComp from "../components/CartComp";
-import Footer from "../components/Footer";
+import FooterOther from "../components/FooterOther";
 import MyNavbar from "../components/MyNavbar";
 import FixexPaddingforNavbar from "../components/sub-components/FixexPaddingforNavbar";
 
@@ -9,7 +9,7 @@ const Cartpage = () => {
       <MyNavbar />
       <FixexPaddingforNavbar>
         <CartComp />
-        <Footer />
+        <FooterOther/>
       </FixexPaddingforNavbar>
     </>
   );

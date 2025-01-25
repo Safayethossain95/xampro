@@ -47,7 +47,21 @@ const CartComp = () => {
       <div className="cartcomp">
         <div className="container">
           <h4 className="font-sora text-[24px] font-bold py-6">Cart</h4>
-          <div className="cartboard p-12  w-full bg-white">
+          {
+            cart.length==0?
+            <>
+            <div className="flex flex-col gap-8 font-semibold items-center justify-center cartboard mb-[200px] h-[500px] p-12  w-full bg-white">
+              <img src="https://www.xampro.org/static/media/emptyCart.e9db0557.svg" alt="" />
+              <h3 className="font-sora text-[22px] text-black">Your Cart is Empty</h3>
+              <button className=" bg-[#0052CC] font-sora font-semibold text-white py-3 px-6 rounded-lg text-lg hover:bg-[#003EA6]">
+          <Link to="/">
+          Continue Shopping
+          </Link>
+        </button>
+            </div>
+            </>
+            : 
+          <div className="cartboard mb-[200px] p-12  w-full bg-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="div">
                 {cart?.map((item, key) => {
@@ -205,6 +219,7 @@ const CartComp = () => {
               </div>
             </div>
           </div>
+          }
         </div>
       </div>
     </>
