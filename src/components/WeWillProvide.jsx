@@ -4,11 +4,14 @@ const WeWillProvide = () => {
   return (
     <>
 
-    <div className="bg-[url('assets/images/willprovidebg.png')] bg-cover bg-center py-[90px]">
-    <div className="text-center">
+    <div className="relative bg-cover bg-center ">
+    <div className="absolute  w-full h-full top-0 -z-1">
+      <img className="w-full h-full" src="assets/images/willprovidebg.png" alt="" />
+    </div>
+    <div className="pt-[90px] relative text-center">
         <h4 className="font-semibold font-sora text-[40px] text-white mb-[55px]">We will provide you</h4>
     </div>
-    <div className="container">
+    <div className="relative container pb-[100px]">
 
          <div className=" flex flex-col lg:flex-row items-center gap-2 text-white">
       {/* Item 1 */}
