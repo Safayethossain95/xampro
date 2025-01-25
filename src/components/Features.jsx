@@ -1,3 +1,4 @@
+import React from "react";
 import FeatureCard from "./sub-components/FeatureCard"
 
 
@@ -52,10 +53,10 @@ return (
                     {
                         features.map((item,key)=>{
                             return(
-                                <>
-                                <FeatureCard key={key} item={item}/>
+                                <React.Fragment key={key}>
+                                <FeatureCard  item={item}/>
                                 
-                                </>
+                                </React.Fragment>
                             )
                         })
                     }

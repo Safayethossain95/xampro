@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import Column from '../components/Column'; // Assuming Column is your Column component
 import { DragDropContext } from 'react-beautiful-dnd';
+import MyNavbar from '../components/MyNavbar';
+import FixexPaddingforNavbar from '../components/sub-components/FixexPaddingforNavbar';
+import { useSelector } from 'react-redux';
 
 function Createpackage() {
   const initialColumns = {
@@ -8,10 +11,10 @@ function Createpackage() {
       id: 'todo',
       title:"List of services",
       list: [
-        { id:"1",text: 'Speaking', img: 'assets/images/speaking-icon.png', price: 100 },
-        { id:"2",text: 'Reading', img: 'assets/images/reading-icon.png', price: 300 },
-        { id:"3",text: 'Listening', img: 'assets/images/listening-icon.png', price: 500 },
-        { id:"4",text: 'Writing', img: 'assets/images/writing-icon.png', price: 100 }
+        { id:"1",text: 'Speaking', img: 'assets/images/speaking-icon.png', price: 100,aveRatings:4.2,photo:"https://production-ieltsx.sgp1.digitaloceanspaces.com/1669096977015-image__1__360.png",ratingNumber:"1" },
+        { id:"2",text: 'Reading', img: 'assets/images/reading-icon.png', price: 300,aveRatings:3.5,photo:"https://production-ieltsx.sgp1.digitaloceanspaces.com/1669096977015-image__1__360.png",ratingNumber:"1" },
+        { id:"3",text: 'Listening', img: 'assets/images/listening-icon.png', price: 500,aveRatings:5,photo:"https://production-ieltsx.sgp1.digitaloceanspaces.com/1669096977015-image__1__360.png",ratingNumber:"1" },
+        { id:"4",text: 'Writing', img: 'assets/images/writing-icon.png', price: 100,aveRatings:5,photo:"https://production-ieltsx.sgp1.digitaloceanspaces.com/1669096977015-image__1__360.png",ratingNumber:"1" }
       ]
     },
     doing: {
@@ -65,20 +68,77 @@ function Createpackage() {
       }));
     }
   };
-
+  const [packagedata, setPackagedata] = useState({
+    packageName: "",
+    courseType: "IELTS general",
+  });
+  const handleChange = (e) => {
+    
+    const { id, value } = e.target;
+   
+    setPackagedata((prev) => ({
+      ...prev,
+      [id]: value, // Update the respective field
+    }));
+  };
+  const createpackerr = useSelector(state=>state.example.createpackerr)
+  
   return (
+   <>
+   <MyNavbar/>
+   <FixexPaddingforNavbar>
    <div className="container">
+   <h4 className="font-sora text-[24px] font-bold py-6">Create Package</h4>
+       
+   <div className="flex m-4 items-center gap-4 bg-white p-4 rounded-lg shadow-md">
+      {/* Package Name Input */}
+      <div className="flex-1">
+        <label htmlFor="packageName" className="block text-sm font-medium text-gray-700 mb-1">
+          Package name
+        </label>
+        <input
+          type="text"
+          id="packageName"
+          placeholder="Enter package name"
+          value={packagedata.packageName} // Bind value to state
+          onChange={handleChange} // Handle changes
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+        />
+        {
+          createpackerr && <p className='text-[#dc3545] text-[10px] font-sora'>Enter Package Name</p>
+        }
+      </div>
+
+      {/* Course Type Dropdown */}
+      <div className="flex-1">
+        <label htmlFor="courseType" className="block text-sm font-medium text-gray-700 mb-1">
+          Course type
+        </label>
+        <select
+          id="courseType"
+          value={packagedata.courseType} // Bind value to state
+          onChange={handleChange} // Handle changes
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 focus:outline-none"
+        >
+          <option value="IELTS general">IELTS general</option>
+          <option value="IELTS academic">IELTS academic</option>
+        </select>
+      </div>
+    </div>
      <DragDropContext onDragEnd={onDragEnd}>
       <div className="grid grid-cols-2 gap-4 p-8">
         {Object.values(columns).map((col) => (
           <div key={col.id} className="bg-white rounded-lg shadow-lg p-4">
             <h2 className="text-3xl font-sora font-semibold px-2  mb-4">{col.title.toUpperCase()}</h2>
-            <Column col={col} />
+            <Column col={col} packagedata={packagedata}/>
           </div>
         ))}
       </div>
     </DragDropContext>
    </div>
+   
+   </FixexPaddingforNavbar>
+   </>
   );
 }
 

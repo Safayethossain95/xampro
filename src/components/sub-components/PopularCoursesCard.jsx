@@ -1,9 +1,17 @@
 /* eslint-disable react/prop-types */
 
+import { useDispatch } from "react-redux";
+import { addtoCart } from "../../store/exampleSlice";
+import { RatingStars } from "../PackageComp";
+import { useSelector } from "react-redux";
+
+import {toast} from 'react-hot-toast'
 const PopularCoursesCard = ({ item }) => {
+  const dispatch = useDispatch();
+  const username = useSelector((state) => state.example.username);
   return (
     <>
-      <div className="popularcoursescard  mx-auto">
+      <div  className="popularcoursescard  mx-auto">
         <div className="max-w-sm bg-white  border rounded-[24px] border-gray-200 p-[18px] shadow-lg">
           <img
             className="rounded-t-lg w-full h-48 object-cover"
@@ -13,7 +21,9 @@ const PopularCoursesCard = ({ item }) => {
           <div className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <span className="text-[#F1B44C] text-[20px]">★★★★★</span>
+                <span className="text-[#F1B44C] text-[20px]">
+                  <RatingStars rating={item.aveRatings} />
+                </span>
                 <span className="ml-2 text-gray-700 text-sm font-medium">
                   {item.aveRatings} ({item.ratingNumber})
                 </span>
@@ -132,7 +142,7 @@ const PopularCoursesCard = ({ item }) => {
               </li>
             </ul>
             <div className="mt-4 flex items-center justify-between">
-              <button className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+              <button onClick={()=>{username ? dispatch(addtoCart(item)):toast.error("Please Login First!")}} className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
                 Add to cart
               </button>
               <span className="text-gray-800 font-bold">TK. 3000</span>

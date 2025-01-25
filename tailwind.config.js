@@ -13,6 +13,8 @@ export default {
       },
       fontFamily: {
         sora: ['Sora', 'sans-serif'],
+        manrope:["Manrope", 'serif'],
+        poppins:["Poppins", 'serif']
       },
       screens: {
         'xlg': '1280px', // Define xlg breakpoint if you need a custom one

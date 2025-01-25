@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 const CreatePackageComp = () => {
@@ -16,7 +17,9 @@ const CreatePackageComp = () => {
           selections from this page and purchase it.
         </p>
         <button className=" bg-[#0052CC] font-sora font-semibold text-white py-3 px-6 rounded-lg text-lg hover:bg-[#003EA6]">
+          <Link to="/create-package">
           Create Package
+          </Link>
         </button>
       </div>
 

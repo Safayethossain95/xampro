@@ -1,18 +1,45 @@
-import { useState } from 'react';
+import {  useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { clearUsername, deletepackage, removeCart } from '../store/exampleSlice';
 
 const MyNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate()
+  const username = useSelector((state) => state.example.username);
+  const dispatch = useDispatch();
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleLogout=()=>{
+    dispatch(clearUsername());
+    dispatch(removeCart())
+    dispatch(deletepackage())
+    setIsModalOpen(false)
+    navigate("/")
+}
 
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+  const cart = useSelector((state) => state.example.cart);
+
+  useEffect(()=>{
+    if(!username){
+      dispatch(removeCart())
+    }
+  },[])
   return (
-    <nav className="mynavbar bg-white h-[88px] w-full shadow-md">
-      <div className="container flex mx-auto items-center justify-between h-full">
+    <nav className="fixed z-50 top-0 mynavbar bg-white h-[88px] w-full shadow-md">
+      
+      <div className="container relative flex mx-auto items-center justify-between h-full">
         {/* Logo */}
         <div className="font-bold text-xl">
-          <img src="assets/images/logo.png" className="max-h-[66px]" alt="Logo" />
+         <Link to="/">
+         <img src="assets/images/logo.png" className="max-h-[66px]" alt="Logo" />
+         </Link>
         </div>
 
         {/* Hamburger Icon */}
@@ -56,27 +83,49 @@ const MyNavbar = () => {
               </a>
             </li>
             <li>
-              <div className="cart   border-l-2 border-r-2 border-[#DBE9FD] px-8">
+             <Link to="/cart">
+             <div  className="cart   border-l-2 border-r-2 border-[#DBE9FD] px-8">
                 <div className="relative">
                 <div className="flex items-center justify-center w-4 h-4 absolute top-0 -right-1 bg-[#CCE0FF] rounded-full">
-                  <p className="text-[11px] font-sora font-normal">0</p>
+                  <p className="text-[11px] font-sora font-normal">{cart.length}</p>
                 </div>
                 <img className="w-7 -mt-1" src="assets/images/cart-icon.png" alt="" />
                 </div>
               </div>
+              </Link>
             </li>
             <li>
-              <div className="flex items-center gap-2 profileicon">
+              {username ?
+              <div onClick={toggleModal} className="flex items-center gap-2 profileicon cursor-pointer">
                 <img className="w-[40px] h-[40px] -mt-1" src="assets/images/demoprofile.png" alt="" />
                 <div className="drpdwn">
-                  <p className="text-[#74788D] font-sora">Safayet</p>
+                  <p className="text-[#74788D] font-sora">{username}</p>
                 </div>
                 <img src="assets/images/arrow-down-icon.png" alt="" />
               </div>
+
+              :
+                <Link to="/login" className='text-[#74788D] font-sora'>Login</Link>
+              }
             </li>
           </ul>
         </div>
         </div>
+      {isModalOpen && (
+        <div
+          className="absolute p-5 top-[90px] right-[80px] w-[170px] py-6 bg-white shadow-lg rounded-lg border border-gray-300"
+        >
+          <ul>
+            <li className='cursor-pointer font-sora text-[15px] text-black'>
+              <Link to="/package">Dashboard</Link>
+            </li>
+            <li className='cursor-pointer  mt-3 pt-3 font-sora text-[15px] text-black'>
+              <Link to="/create-package">Create Package</Link>
+            </li>
+            <li onClick={handleLogout} className='cursor-pointer font-sora text-[15px] text-black mt-3 pt-3 border-t border-t-black'>Logout</li>
+          </ul>
+        </div>
+      )}
       </div>
     </nav>
 

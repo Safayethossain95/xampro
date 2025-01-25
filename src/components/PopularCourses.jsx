@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getPopularCourses } from "../utils/api-calls";
 import PopularCoursesCard from "./sub-components/PopularCoursesCard";
 
@@ -36,9 +36,9 @@ const PopularCourses = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-[34px]">
             {popularcourses.map((item, key) => {
               return (
-                <>
-                  <PopularCoursesCard key={key} item={item} />
-                </>
+                <React.Fragment key={key} >
+                  <PopularCoursesCard item={item} />
+                </React.Fragment>
               );
             })}
           </div>
